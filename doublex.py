@@ -24,6 +24,12 @@ doubleXData = [
     ["BE", "PE", "(3)", "RP", "2E", "(HR)", "OI", "BE", "HB", "TP", "RD2", "CS", "C2", "KWP", "RD", "CI", "1-", "RO", "RO", "CC", "2E", "KWP", "RD", "TRB", "-", "-", "-", "-", "-", "KWP"],
 ]
 
+posPitchData = [
+    #10   11  12    13   14   15   16  17  18  19  20   21  22    23   24   25     26   27 28   29 30  31   32     33   34   35     36   37    38   39    
+    ["D", "D", "D", "D", "D", "D", "", "", "", "", "", "", "1+", "", "", "(HR)", "1+", "", "", "", "", "1+", "", "(HR)", "", "(HR)", "", "", "X", "1+"],
+]
+
+
 keyData = [
     ["TP", "Triple Play if 1st & 2nd or bases loaded and no outs, DP otherwise", "RO", "Rain Out (no event if home team has roof)"],
     ["CS", "Collision, Treat as 2, Check SS & LF for injury", "C2", "Collision, Treat as 2, Check 2B & RF for injury"],
@@ -71,9 +77,11 @@ for i in range(10, 40):
     colwidths.append(23)
 
 doubleXData.insert(0, header)
+posPitchData.insert(0, header)
 
 # Create a Table object
 doubleXTable = Table(doubleXData, colWidths=colwidths, rowHeights=[18,12])
+posPitchTable = Table(posPitchData, colWidths=colwidths, rowHeights=[18,12])
 
 table_style = TableStyle([
     ('GRID', (0,0), (-1,-1), 1, colors.black),
@@ -88,6 +96,22 @@ table_style = TableStyle([
 ])
 doubleXTable.setStyle(table_style)
 
+pp_table_style = TableStyle([
+    ('GRID', (0,0), (-1,-1), 1, colors.black),
+    ('BACKGROUND', (0, 0), (-1, 0), hex_to_color("#CCCCCC")),
+    ('BACKGROUND', (0, 1), (-1, 1), hex_to_color("#90EE90")),
+    ('BACKGROUND', (13, 1), (14, 1), hex_to_color("#FFFF00")),
+    ('BACKGROUND', (9, 1), (9, 1), hex_to_color("#0000FF")),
+    ('INNERPADDING', (0,0), (-1,-1), 1),
+    ('OUTERPADDING', (0,0), (-1,-1), 1),
+    ('FONTNAME', (0, 0), (-1, -1), 'Helvetica-Bold'),  # set bold font
+    ('FONTSIZE', (0,0), (-1,-1), 9),  # set font size for all cells to 9
+    ('TEXTCOLOR', (0,0), (-1,-1), colors.black),  # set text color for all cells to black
+    ('LEADING', (0, 0), (-1, -1), 9),  # set leading value
+    ('ALIGN', (0,0), (-1,-1), 'CENTER'),  # center text in all cells
+])
+posPitchTable.setStyle(pp_table_style)
+
 # Create a title with a style and center alignment
 title_style = ParagraphStyle(
     'Title', 
@@ -96,6 +120,7 @@ title_style = ParagraphStyle(
     alignment=1  # Center alignment
 )
 doubleXTitle = Paragraph('Double X Table', title_style)
+pospitchTitle = Paragraph('Position Player Pitching', title_style)
 
 story = []
 
@@ -123,6 +148,11 @@ keyTable.setStyle(key_table_style)
 story.append(keyTable)
 
 story.append(Spacer(1, 12))
+
+story.append(pospitchTitle)  # Add the title to the story
+story.append(Spacer(1, -10))  # Add some space below the title
+story.append(posPitchTable)
+
 
 # Build the PDF
 pdf.build(story)
