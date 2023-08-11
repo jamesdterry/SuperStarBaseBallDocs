@@ -99,7 +99,6 @@ doubleXTable.setStyle(table_style)
 pp_table_style = TableStyle([
     ('GRID', (0,0), (-1,-1), 1, colors.black),
     ('BACKGROUND', (0, 0), (-1, 0), hex_to_color("#CCCCCC")),
-    ('BACKGROUND', (0, 1), (-1, 1), hex_to_color("#90EE90")),
     ('BACKGROUND', (13, 1), (14, 1), hex_to_color("#FFFF00")),
     ('BACKGROUND', (9, 1), (9, 1), hex_to_color("#0000FF")),
     ('INNERPADDING', (0,0), (-1,-1), 1),
@@ -119,7 +118,7 @@ title_style = ParagraphStyle(
     fontSize=10,
     alignment=1  # Center alignment
 )
-doubleXTitle = Paragraph('Double X Table', title_style)
+doubleXTitle = Paragraph('Pitcher XX Table', title_style)
 pospitchTitle = Paragraph('Position Player Pitching', title_style)
 
 story = []

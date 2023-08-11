@@ -5,6 +5,9 @@ from reportlab.lib.colors import Color
 from reportlab.lib import colors
 from rotated_text import RotatedText
 
+# Use Double X Option?
+doublex = False
+
 def hex_to_color(hex_value):
     """
     Convert a hex color value to a ReportLab Color object.
@@ -42,6 +45,9 @@ pitcherXData = [
     ["Pos", "1B", "1B",  "CF", "C", "SS", "SS", "SS", "1B", "1B", "1B", "CF", "CF",  "3B",  "P",   "2B",  "2B",  "3B",  "3B",  "2B", "1B", "RF",  "RF",  "SS",  "P",  "P", "C",  "C", "LF",  "LF",  "CF"],
     ["Dur", "15", "N/I", "8",  "4", "3",  "2",  "7",  "10", "14", "20", "6",  "N/I", "N/I", "N/I", "N/I", "N/I", "N/I", "N/I", "5",  "12", "N/I", "N/I", "N/I", "0",  "0", "0",  "1", "N/I", "N/I", "9"],
 ]
+
+if doublex:
+    pitcherXData[0][29] = 'XX'
 
 def_inner_table_style = TableStyle([
     ('FONTNAME', (0, 0), (-1, -1), 'Helvetica-Bold'),  # set bold font
@@ -81,6 +87,9 @@ key2Data = [
     ["0", "When a zero appears for an injury duration, the player is out for the remainder of the game."],
     ["N/I", "When N/I appears there is no injury."],
 ]
+
+if doublex:
+    key2Data.insert(0, ["XX", "Roll on Pitcher XX Chart"])
 
 # Create a PDF with 'names_ages.pdf' as the name
 pdf = SimpleDocTemplate("defense.pdf", pagesize=landscape(letter), leftMargin=10, rightMargin=10, topMargin=10, bottomMargin=10)
@@ -221,17 +230,21 @@ story.append(pitcherXSubTitle)
 story.append(Spacer(1, -8))
 
 # Key 2 Chart
+k2rowHeights=[12,12,12,12,12,12,12,12]
+if doublex:
+    k2rowHeights.append(12)
+
 story.append(Spacer(1, 5))  # Add some space below the title
-key2Table = Table(key2Data, colWidths=[24,600], rowHeights=[12,12,12,12,12,12,12,12])
+key2Table = Table(key2Data, colWidths=[24,600], rowHeights=k2rowHeights)
 key2_table_style = TableStyle([
-    ('GRID', (0,0), (0,7), 1, colors.black),
+    ('GRID', (0,0), (0,8), 1, colors.black),
     ('INNERPADDING', (0,0), (-1,-1), 1),
     ('OUTERPADDING', (0,0), (-1,-1), 1),
     ('FONTNAME', (0, 0), (-1, -1), 'Helvetica-Bold'),  # set bold font
     ('FONTSIZE', (0,0), (-1,-1), 9),  # set font size for all cells
     ('TEXTCOLOR', (0,0), (-1,-1), colors.black),  # set text color for all cells to black
     ('LEADING', (0, 0), (-1, -1), 9),  # set leading value
-    ('ALIGN', (0,0), (0,7), 'CENTER'),
+    ('ALIGN', (0,0), (0,8), 'CENTER'),
 ])
 key2Table.setStyle(key2_table_style)
 story.append(key2Table)
