@@ -102,7 +102,12 @@ for i in range(10, 40):
     colwidths.append(23)
 
 errorData.insert(0, header)
-fieldingDeterminationData.insert(0, header)
+
+header2 = [Paragraph('Fielder', header_style)]
+for i in range(10, 40):
+    header2.append(Paragraph(str(i), header_style))
+
+fieldingDeterminationData.insert(0, header2)
 
 # Create a Table object
 errorTable = Table(errorData, colWidths=colwidths, rowHeights=[18,12,12,12,12,12])
@@ -157,8 +162,8 @@ error_explain_style = ParagraphStyle(
     fontSize=8,
     textColor='black',
     alignment=1,
-    leftIndent=100,
-    rightIndent=100,
+    leftIndent=70,
+    rightIndent=70,
 )
 errorExplainTitle = Paragraph("To determine which position may have made an error (whenever an error occurs during the game), choose the most appropriate row above and roll to determine the fielder involved. Then, check that fielder's error rating at his position (a letter from A through Z).  Consult the error rating chart by rolling and summing the red and green (defensive) dice.  If the numbers rolled is one of that letters error numbers, the error occurs.  Batted-ball errors where the error is negated should be considered a result of 'F'", error_explain_style)
 
