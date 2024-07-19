@@ -99,8 +99,9 @@ doubleXTable.setStyle(table_style)
 pp_table_style = TableStyle([
     ('GRID', (0,0), (-1,-1), 1, colors.black),
     ('BACKGROUND', (0, 0), (-1, 0), hex_to_color("#CCCCCC")),
-    ('BACKGROUND', (13, 1), (14, 1), hex_to_color("#FFFF00")),
-    ('BACKGROUND', (9, 1), (9, 1), hex_to_color("#0000FF")),
+    ('BACKGROUND', (13, 1), (14, 1), hex_to_color("#FFFF00")), # Walk
+    ('BACKGROUND', (24, 1), (24, 1), hex_to_color("#FFFF00")), # Walk
+    ('BACKGROUND', (9, 1), (9, 1), hex_to_color("#0000FF")), # Strikeout
     ('INNERPADDING', (0,0), (-1,-1), 1),
     ('OUTERPADDING', (0,0), (-1,-1), 1),
     ('FONTNAME', (0, 0), (-1, -1), 'Helvetica-Bold'),  # set bold font
